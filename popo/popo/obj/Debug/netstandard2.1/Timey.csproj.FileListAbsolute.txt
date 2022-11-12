@@ -1,0 +1,17 @@
+C:\Users\Nico\Desktop\popo\popo\popo\bin\Debug\netstandard2.1\Timey.deps.json
+C:\Users\Nico\Desktop\popo\popo\popo\bin\Debug\netstandard2.1\Timey.dll
+C:\Users\Nico\Desktop\popo\popo\popo\bin\Debug\netstandard2.1\Timey.pdb
+C:\Users\Nico\Desktop\popo\popo\popo\obj\Debug\netstandard2.1\Timey.csproj.AssemblyReference.cache
+C:\Users\Nico\Desktop\popo\popo\popo\obj\Debug\netstandard2.1\Timey.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Nico\Desktop\popo\popo\popo\obj\Debug\netstandard2.1\App.xaml.g.cs
+C:\Users\Nico\Desktop\popo\popo\popo\obj\Debug\netstandard2.1\MainPage.xaml.g.cs
+C:\Users\Nico\Desktop\popo\popo\popo\obj\Debug\netstandard2.1\PopupView.xaml.g.cs
+C:\Users\Nico\Desktop\popo\popo\popo\obj\Debug\netstandard2.1\Views\PaginaVreme.xaml.g.cs
+C:\Users\Nico\Desktop\popo\popo\popo\obj\Debug\netstandard2.1\Timey.AssemblyInfoInputs.cache
+C:\Users\Nico\Desktop\popo\popo\popo\obj\Debug\netstandard2.1\Timey.AssemblyInfo.cs
+C:\Users\Nico\Desktop\popo\popo\popo\obj\Debug\netstandard2.1\Timey.csproj.CoreCompileInputs.cache
+C:\Users\Nico\Desktop\popo\popo\popo\obj\Debug\netstandard2.1\XamlC.stamp
+C:\Users\Nico\Desktop\popo\popo\popo\obj\Debug\netstandard2.1\Timey.dll
+C:\Users\Nico\Desktop\popo\popo\popo\obj\Debug\netstandard2.1\refint\Timey.dll
+C:\Users\Nico\Desktop\popo\popo\popo\obj\Debug\netstandard2.1\Timey.pdb
+C:\Users\Nico\Desktop\popo\popo\popo\obj\Debug\netstandard2.1\ref\Timey.dll
