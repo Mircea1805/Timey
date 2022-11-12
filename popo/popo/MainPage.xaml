@@ -82,10 +82,9 @@
                             <FlexLayout JustifyContent="SpaceBetween" AlignItems="Center" Padding="20, 0">
                                 <ContentView >
                                     <FlexLayout AlignItems="Center">
-                                        <input:CheckBox IsChecked="{Binding Complete}" />
+                                        <CheckBox IsChecked="{Binding Complete}" CheckedChanged="OnCheckBoxCheckedChanged"/>
                                         <Label Text="{Binding TodoText}" FontSize="Large"/>
-                                        <Label HorizontalOptions="Center" Text="{Binding Date.DayOfWeek}"
-                                           />
+                                        <Label HorizontalOptions="Center" Text="{Binding Date.DayOfWeek}" />
                                         <Label Text="{Binding Time}"/>
 
                                     </FlexLayout>

@@ -7,86 +7,43 @@ using System.Threading.Tasks;
 
 namespace Timey
 {
-    public static class Constants
-    {
-        public const string DatabaseFilename = "TodoSQLite.db3";
-
-        public const SQLite.SQLiteOpenFlags Flags =
-            SQLite.SQLiteOpenFlags.ReadWrite |
-            SQLite.SQLiteOpenFlags.Create |
-            SQLite.SQLiteOpenFlags.SharedCache;
-
-        public static string DatabasePath
-        {
-            get
-            {
-                var basePath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-                return basePath + DatabaseFilename;
-            }
-        }
-    }
-
-    public class AsyncLazy<T>
-    {
-        readonly Lazy<Task<T>> instance;
-
-        public AsyncLazy(Func<T> factory)
-        {
-            instance = new Lazy<Task<T>>(() => Task.Run(factory));
-        }
-
-        public AsyncLazy(Func<Task<T>> factory)
-        {
-            instance = new Lazy<Task<T>>(() => Task.Run(factory));
-        }
-
-        public TaskAwaiter<T> GetAwaiter()
-        {
-            return instance.Value.GetAwaiter();
-        }
-    }
-
     public class TodoItemDatabase
     {
-        static SQLiteAsyncConnection Database;
+        readonly SQLiteAsyncConnection database;
 
-        public static readonly AsyncLazy<TodoItemDatabase> Instance = new AsyncLazy<TodoItemDatabase>(async () =>
+        public TodoItemDatabase(string dbPath)
         {
-            var instance = new TodoItemDatabase();
-            CreateTableResult result = await Database.CreateTableAsync<TodoItem>();
-            return instance;
-        });
-
-        public TodoItemDatabase()
-        {
-            Database = new SQLiteAsyncConnection(Constants.DatabasePath, Constants.Flags);
+            database = new SQLiteAsyncConnection(dbPath);
+            database.CreateTableAsync<TodoItem>().Wait();
         }
 
         public Task<List<TodoItem>> GetItemsAsync()
         {
-            return Database.Table<TodoItem>().ToListAsync();
+            return database.Table<TodoItem>().ToListAsync();
         }
 
-        /*public Task<TodoItem> GetItemAsync(int id)
+        public Task<TodoItem> GetItemAsync(int id)
         {
-            return Database.Table<TodoItem>().Where(i => i.ID == id).FirstOrDefaultAsync();
-        }*/
+            return database.Table<TodoItem>()
+                            .Where(i => i.ID == id)
+                            .FirstOrDefaultAsync();
+        }
 
-        public Task<int> SaveItemAsync(TodoItem item)
+        public Task<int> SaveItemAsync(TodoItem task)
         {
-            if (item.ID != 0)
+            if (task.ID != 0)
             {
-                return Database.UpdateAsync(item);
+                return database.UpdateAsync(task);
             }
             else
             {
-                return Database.InsertAsync(item);
+                return database.InsertAsync(task);
             }
         }
 
-        public Task<int> DeleteItemAsync(TodoItem item)
+        public Task<int> DeleteItemAsync(TodoItem task)
         {
-            return Database.DeleteAsync(item);
+            return database.DeleteAsync(task);
         }
     }
 }

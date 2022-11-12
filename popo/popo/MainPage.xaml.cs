@@ -20,12 +20,23 @@ namespace Timey
     {
         public MainPage()
         {
-
             InitializeComponent();
             GetCoordinates();
         }
 
-        
+        void OnCheckBoxCheckedChanged(object sender, CheckedChangedEventArgs e)
+        {
+            TodoItem todoItemBeingRemoved = sender as TodoItem;
+            if (e.Value == true)
+            {
+                App.database.DeleteItemAsync(todoItemBeingRemoved);
+            }
+            else
+            {
+                App.database.SaveItemAsync(todoItemBeingRemoved);
+                todoItemBeingRemoved.Complete = false;
+            }
+        }
 
         private string Location { get; set; } = "Vladivostok";
         public double Latitude { get; set; }

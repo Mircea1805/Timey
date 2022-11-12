@@ -13,40 +13,32 @@ namespace Timey
 
     public class TodoListViewModel
     {
-
         public ObservableCollection<TodoItem> TodoItems { get; set; }
 
         public TodoListViewModel ()
         {
             TodoItems = new ObservableCollection<TodoItem>();
-            TodoItems.DefaultIfEmpty(new TodoItem
-            {
-                TodoText = string.Empty,
-                Complete = false,
-                Date = DateTime.Now,
-                Time = TimeSpan.Zero,
-                ID = 0
-            });
         }
-        public ICommand AddTodoCommand => new Command(AddTodoItem);
+        
         public string NewTodoInputValue { get; set; }
 
-        
         public DateTime Date { get; set; }
         public TimeSpan Time { get; set; }
-    void AddTodoItem()
+
+        public ICommand AddTodoCommand => new Command(AddTodoItem);
+
+        void AddTodoItem()
         {
-            TodoItem newtodo = new TodoItem
+            TodoItem newtodo;
+            newtodo = new TodoItem
             {
                 TodoText = NewTodoInputValue,
                 Complete = false,
                 Date = Date,
                 Time = Time,
-                ID = TodoItems.LastOrDefault().ID + 1
             };
+            App.database.SaveItemAsync(newtodo);
             TodoItems.Add(newtodo);
-            TodoItemDatabase database = new TodoItemDatabase();
-            database.SaveItemAsync(newtodo);
         }
         
         public ICommand RemoveTodoCommand => new Command(RemoveTodoItem);
@@ -54,8 +46,8 @@ namespace Timey
         void RemoveTodoItem(object o)
         {
             TodoItem todoItemBeingRemoved = o as TodoItem;
+            App.database.DeleteItemAsync(todoItemBeingRemoved);
             TodoItems.Remove(todoItemBeingRemoved);
         }
-
     }
 }
